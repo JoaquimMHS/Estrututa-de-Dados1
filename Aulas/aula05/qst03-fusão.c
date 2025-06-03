@@ -23,8 +23,8 @@ No *incereOrde(No *lista, int valor){
     if (lista == NULL) lista = novo;
     else {
         while (aux != NULL && valor > aux->chave){
-            aux = aux->prox;
             pred = aux;
+            aux = aux->prox;
         }
         if(pred == NULL){
             lista = novo;
@@ -34,7 +34,7 @@ No *incereOrde(No *lista, int valor){
             pred->prox = novo;
         }
     }
-    return novo;
+    return lista;
 }
 
 No* fusao (No* lista1, No* lista2){
@@ -73,4 +73,38 @@ No* fusao (No* lista1, No* lista2){
     }
 
     return listaFusao;  
+}
+
+void imprimeLista(No* lista){
+    if(lista == NULL) return;
+    printf("%d ", lista->chave);
+    imprimeLista(lista->prox);
+}
+
+int main(){
+    No* lista1 = NULL;
+    No* lista2 = NULL;
+    No* listaFusao = NULL;
+    int qnt, number;
+
+    printf("Digite quantos elementos tem a lista 1: ");
+    scanf("%d", &qnt);
+    for(int i = 0; i < qnt; i++){
+        printf("Digite o elemento : ");
+        scanf("%d", &number);
+        lista1 = incereOrde(lista1, number);
+    }
+
+    printf("Digite quantos elementos tem a lista 2: ");
+    scanf("%d", &qnt);
+    for(int i = 0; i < qnt; i++){
+        printf("Digite o elmento : ");
+        scanf("%d", &number);
+        lista2 = incereOrde(lista2, number);
+    }
+
+    listaFusao =fusao(lista1, lista2);
+    imprimeLista(listaFusao);
+
+    return 0;
 }
